@@ -1,5 +1,3 @@
-import { team } from '../ACTIONS/types';
-
 const initialState = {
     teamList: [],
     teamDetails: {
@@ -10,7 +8,7 @@ const initialState = {
 export default function(state = initialState, action){
 
     switch (action.type){
-        case team.FIND_ALL_TEAMS: 
+        case "FIND_ALL_TEAMS": 
             return{
                 ...state,
                 teamList: action.payload

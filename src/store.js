@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./REDUCERS/appReducer";
 
 const initialState = {};
-const middleware = [thunk];
+const middleware = [thunk];  //async actions
 
 let store;
 

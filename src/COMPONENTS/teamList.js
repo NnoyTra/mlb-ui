@@ -2,8 +2,7 @@
 import React, {Component} from "react";
 import TeamDetails from "./teamDetails";
 import { connect } from 'react-redux';
-import { findAllTeamsFunc } from '../ACTIONS/teamActions';
-import PropTypes from 'prop-types';
+import { findAllTeamsFunc } from '../CONNECTOR/teamListConnector';
 
 class TeamList extends Component {
 
@@ -34,13 +33,11 @@ class TeamList extends Component {
     }
 }
 
-TeamList.propTypes = {
-    teamList: PropTypes.object.isRequired,
-    findAllTeamsFunc: PropTypes.func.isRequired
-
-}
-
 const mapStateToProps = state =>({
     teamList: state.teams.teamList
 });
-export default connect(mapStateToProps, {findAllTeamsFunc}) (TeamList);
+
+const mapDispatchToProps = {
+    findAllTeamsFunc
+};
+export default connect(mapStateToProps, mapDispatchToProps) (TeamList);
