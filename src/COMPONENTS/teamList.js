@@ -6,35 +6,35 @@ import { findAllTeamsFunc } from '../CONNECTOR/teamListConnector';
 
 class TeamList extends Component {
 
-    componentDidMount(){
-        this.props.findAllTeamsFunc();
-    }
     render(){
-        const teamList = this.props.teamList;
-        if(teamList.length > 0) {
-        return (
-        <div>
-            <h4>Team List</h4>
-                <div>
-                    {
-                        teamList.map((team)=>(
-                            <TeamDetails key={team.oid} myTeam={team}/>
-                        ))
-                    }
-                </div>
-        </div>
-        );
-        }
-        else {
+        if (this.props.state.renderFlags.renderTeamList) {
+            const teamList = this.props.state.teamList;
+            if(teamList.length > 0) {
             return (
-                <h3>EMPTY LIST</h3>
+            <div>
+                <br />
+                <h4>Team List</h4>
+                    <div>
+                        { teamList.map((team)=>( <TeamDetails key={team.oid} myTeam={team}/> )) }
+                    </div>
+            </div>
+            );
+            }
+            else {
+                return (
+                    <h3>EMPTY LIST</h3>
+                );
+            }
+        } else {
+            return(
+                <div></div>
             );
         }
     }
 }
 
 const mapStateToProps = state =>({
-    teamList: state.teams.teamList
+    state: state.teams
 });
 
 const mapDispatchToProps = {

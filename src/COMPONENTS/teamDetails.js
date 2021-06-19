@@ -1,30 +1,47 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
-import yankeesLogo from './../IMG/yankeesLogo.jfif'
+import { Link } from "react-router-dom";
+import { onUpdateTeam } from './../CONNECTOR/teamListConnector'
 
 class TeamDetails extends Component {
+
+    constructor(props) {
+        super(props);
+        this.team = this.props.myTeam;
+        this.onUpdateTeam = this.onUpdateTeam.bind(this);
+    }
     render(){
-        const team = this.props.myTeam;
         return (
             <div className="card mb-3" style={{ maxWidth: "540px" }}>
-            <div className="row g-0">
-                <div className="col-md-4">
-                    <img src={yankeesLogo} alt="team Logo"/>
-                </div>
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title">{team.name}</h5>
-                        <p className="card-text">{team.state}</p>
-                        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+                <Link to="/teamForm" onClick={this.onUpdateTeam}>
+                    <div className="row g-0">
+                        <div className="col-md-4">
+                            <img src={`http://localhost:9000/teams/imagen/${this.team.oid}`} alt="team Logo" style={{ height: "100%", width: "100%" }} />
+                        </div>
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title">{this.team.name}</h5>
+                                <p className="card-text">{this.team.state}</p>
+                                <p className="card-text"><small className="text-muted">Last updated {this.team.modifiedOn}</small></p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </Link>
             </div>
-        </div>
+            
         );
+    }
+
+    onUpdateTeam() {
+        this.props.onUpdateTeam(this.props.myTeam);
     }
 }
 
 const mapToStateToProps = state => ({
     team: state.teams.teamDetails
-})
-export default connect(mapToStateToProps, {}) (TeamDetails);
+});
+
+const mapDispatchToProps = {
+    onUpdateTeam
+};
+export default connect(mapToStateToProps, mapDispatchToProps) (TeamDetails);

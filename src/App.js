@@ -10,13 +10,16 @@ import TeamForm from "./COMPONENTS/teamForm";
 
 import { Provider } from "react-redux";
 import store from './store';
+import Footer from "./COMPONENTS/COMMONS/Footer";
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
         <div className="App">
-          <Navbar />
+          <header>
+            <Navbar />
+          </header>
           <div className="container">
             <Route exact path="/home" component={Home} />
             <Route exact path="/teams" component={TeamList} />
@@ -25,6 +28,10 @@ function App() {
             <Route exact path="/teamForm" component={TeamForm} />
             <Route exact path="/aboutus" component={AboutUs} />
           </div>
+          <br /><br />
+          <footer>
+            <Footer />
+          </footer>
         </div>
       </BrowserRouter>
     </Provider>
